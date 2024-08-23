@@ -5,7 +5,6 @@ plugins {
 group = "com.bumba.runique.build-logic"
 
 dependencies {
-
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradlePlugin)
@@ -30,6 +29,10 @@ gradlePlugin {
         register("androidLibraryCompose") {
             id = "runique.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+        register("androidFeatureUi") {
+            id = "runique.android.feature.ui"
+            implementationClass = "AndroidFeatureUiConventionPlugin"
         }
     }
 }
