@@ -53,9 +53,7 @@ fun GradientBackground(
                 .then(
                     if (isAtLeastAndroid12) {
                         Modifier.blur(smallDimension / 3f)
-                    } else {
-                        Modifier
-                    }
+                    } else Modifier
                 )
                 .background(
                     brush = Brush.radialGradient(
@@ -70,7 +68,7 @@ fun GradientBackground(
                         radius = smallDimensionPx / 2f
                     )
                 )
-        ){
+        ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
