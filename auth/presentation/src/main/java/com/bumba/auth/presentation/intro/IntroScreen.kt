@@ -1,8 +1,11 @@
 package com.bumba.auth.presentation.intro
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +21,8 @@ import com.bumba.auth.presentation.R
 import com.bumba.core.presentation.designsystem.LogoIcon
 import com.bumba.core.presentation.designsystem.RuniqueTheme
 import com.bumba.core.presentation.designsystem.components.GradientBackground
+import com.bumba.core.presentation.designsystem.components.RuniqueActionButton
+import com.bumba.core.presentation.designsystem.components.RuniqueOutlinedActionButton
 
 @Composable
 fun IntroScreenRoot(
@@ -39,9 +44,51 @@ fun IntroScreen(
     onAction: (IntroAction) -> Unit
 ) {
     GradientBackground {
-
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            contentAlignment = Alignment.Center
+        ) {
+            RuniqueLogoVertical()
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+                .padding(bottom = 48.dp)
+        ) {
+            Text(
+                text = stringResource(id = R.string.welcome_to_runique),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontSize = 20.sp
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = stringResource(id = R.string.runique_description),
+                style = MaterialTheme.typography.bodySmall
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+            RuniqueOutlinedActionButton(
+                text = stringResource(id = R.string.sign_in),
+                isLoading = false,
+                onClick = {
+                    onAction(IntroAction.OnSignInClick)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            RuniqueActionButton(
+                text = stringResource(id = R.string.sign_up),
+                isLoading = false,
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    onAction(IntroAction.OnSignUpClick)
+                }
+            )
+        }
     }
-
 }
 
 @Composable
