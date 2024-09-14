@@ -1,5 +1,7 @@
 package com.bumba.core.domain.util
 
+import sun.awt.image.MultiResolutionCachedImage.map
+
 sealed interface Result<out D, out E : Error> {
 
     data class Success<out D>(val data: D) : Result<D, Nothing>
@@ -30,3 +32,5 @@ fun handleError(result: Result<Unit, PasswordValidationError>) {
         }
     }
 }
+
+typealias EmptyResult<E> = Result<Unit, E>
