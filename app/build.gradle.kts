@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     api(libs.core)
     implementation(libs.androidx.security.crypto.ktx)
+    implementation(libs.bundles.koin)
     implementation(libs.google.android.gms.play.services.location)
     implementation(libs.timber)
 
