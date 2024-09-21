@@ -10,6 +10,7 @@ import androidx.navigation.navigation
 import com.bumba.auth.presentation.intro.IntroScreenRoot
 import com.bumba.auth.presentation.login.LoginScreenRoot
 import com.bumba.auth.presentation.register.RegisterScreenRoot
+import com.bumba.run.presentation.run_overview.RunOverviewScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -43,8 +44,8 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
         composable(route = "register") {
             RegisterScreenRoot(
                 onSignInClick = {
-                    navController.navigate("login"){
-                        popUpTo("register"){
+                    navController.navigate("login") {
+                        popUpTo("register") {
                             inclusive = true
                             saveState = true
                         }
@@ -56,7 +57,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                 }
             )
         }
-        composable("login"){
+        composable("login") {
             LoginScreenRoot(
                 onLoginSuccess = {
                     navController.navigate("run") {
@@ -66,8 +67,8 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                     }
                 },
                 onSignUpClick = {
-                    navController.navigate("register"){
-                        popUpTo("login"){
+                    navController.navigate("register") {
+                        popUpTo("login") {
                             inclusive = true
                             saveState = true
                         }
@@ -82,10 +83,10 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
 private fun NavGraphBuilder.runGraph(navController: NavHostController) {
     navigation(
         startDestination = "run_overview",
-        route=  "run"
-    ){
-        composable("run_overview"){
-            Text(text = "Run Overview")
+        route = "run"
+    ) {
+        composable("run_overview") {
+            RunOverviewScreenRoot()
         }
     }
 }

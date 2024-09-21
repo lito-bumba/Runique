@@ -4,6 +4,7 @@ import android.app.Application
 import com.bumba.auth.data.di.authDataModule
 import com.bumba.auth.presentation.di.authViewModelModule
 import com.bumba.core.data.di.coreDataModule
+import com.bumba.run.presentation.di.runViewModelModule
 import com.bumba.runique.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -25,7 +26,8 @@ class RuniqueApp: Application() {
                 authDataModule,
                 authViewModelModule,
                 appModule,
-                coreDataModule
+                coreDataModule,
+                runViewModelModule
             )
         }
     }
