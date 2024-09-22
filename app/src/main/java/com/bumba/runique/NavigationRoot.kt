@@ -10,7 +10,6 @@ import androidx.navigation.navigation
 import com.bumba.auth.presentation.intro.IntroScreenRoot
 import com.bumba.auth.presentation.login.LoginScreenRoot
 import com.bumba.auth.presentation.register.RegisterScreenRoot
-import com.bumba.run.presentation.active_run.ActiveRunScreen
 import com.bumba.run.presentation.active_run.ActiveRunScreenRoot
 import com.bumba.run.presentation.run_overview.RunOverviewScreenRoot
 
