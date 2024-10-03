@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.bumba.core.presentation.designsystem.RuniqueTheme
 import com.bumba.core.presentation.designsystem.StartIcon
 import com.bumba.core.presentation.designsystem.StopIcon
+import com.bumba.core.presentation.designsystem.components.RuniqueActionButton
 import com.bumba.core.presentation.designsystem.components.RuniqueDialog
 import com.bumba.core.presentation.designsystem.components.RuniqueFloatingActionButton
 import com.bumba.core.presentation.designsystem.components.RuniqueOutlinedActionButton
@@ -151,34 +152,64 @@ private fun ActiveRunScreen(
                     .fillMaxWidth()
             )
         }
+    }
 
-        if (state.showLocationRationale || state.showNotificationRationale) {
-            RuniqueDialog(
-                title = stringResource(R.string.permission_required),
-                onDismiss = { /* Normal dismissing not allowed for permissions */ },
-                description = when {
-                    state.showLocationRationale && state.showNotificationRationale -> {
-                        stringResource(R.string.location_notification_rationale)
-                    }
+    if (!state.shouldTrack && state.hasStartedRunning) {
+        RuniqueDialog(
+            title = stringResource(R.string.running_is_paused),
+            onDismiss = {
+                onAction(ActiveRunAction.OnResumeRunClick)
+            },
+            description = stringResource(R.string.resume_or_finish_run),
+            primaryButton = {
+                RuniqueActionButton(
+                    text = stringResource(R.string.resume),
+                    isLoading = false,
+                    onClick = {
+                        onAction(ActiveRunAction.OnResumeRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            secondaryButton = {
+                RuniqueOutlinedActionButton(
+                    text = stringResource(R.string.finish),
+                    isLoading = state.isSavingRun,
+                    onClick = {
+                        onAction(ActiveRunAction.OnFinishRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        )
+    }
 
-                    state.showLocationRationale -> {
-                        stringResource(R.string.location_rationale)
-                    }
-
-                    else -> stringResource(R.string.notification_rationale)
-                },
-                primaryButton = {
-                    RuniqueOutlinedActionButton(
-                        text = stringResource(R.string.okay),
-                        isLoading = false,
-                        onClick = {
-                            onAction(ActiveRunAction.OnDismissRationaleDialog)
-                            permissionsLauncher.requestRuniquePermission(context)
-                        }
-                    )
+    if (state.showLocationRationale || state.showNotificationRationale) {
+        RuniqueDialog(
+            title = stringResource(R.string.permission_required),
+            onDismiss = { /* Normal dismissing not allowed for permissions */ },
+            description = when {
+                state.showLocationRationale && state.showNotificationRationale -> {
+                    stringResource(R.string.location_notification_rationale)
                 }
-            )
-        }
+
+                state.showLocationRationale -> {
+                    stringResource(R.string.location_rationale)
+                }
+
+                else -> stringResource(R.string.notification_rationale)
+            },
+            primaryButton = {
+                RuniqueOutlinedActionButton(
+                    text = stringResource(R.string.okay),
+                    isLoading = false,
+                    onClick = {
+                        onAction(ActiveRunAction.OnDismissRationaleDialog)
+                        permissionsLauncher.requestRuniquePermission(context)
+                    }
+                )
+            }
+        )
     }
 }
 
