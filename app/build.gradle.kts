@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.runique.android.application.cmpose)
     alias(libs.plugins.runique.jvm.ktor)
-    alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
 android {
