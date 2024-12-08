@@ -4,6 +4,7 @@ import android.app.Application
 import com.bumba.auth.data.di.authDataModule
 import com.bumba.auth.presentation.di.authViewModelModule
 import com.bumba.core.data.di.coreDataModule
+import com.bumba.core.database.di.databaseModule
 import com.bumba.run.location.di.locationModule
 import com.bumba.run.presentation.di.runPresentationModule
 import com.bumba.runique.di.appModule
@@ -33,7 +34,8 @@ class RuniqueApp: Application() {
                 appModule,
                 coreDataModule,
                 runPresentationModule,
-                locationModule
+                locationModule,
+                databaseModule
             )
         }
     }
