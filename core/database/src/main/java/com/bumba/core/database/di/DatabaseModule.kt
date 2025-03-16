@@ -15,10 +15,11 @@ val databaseModule = module {
             androidApplication(),
             RunDatabase::class.java,
             "run_db"
-        )
+        ).build()
     }
 
     single { get<RunDatabase>().runDao }
+    single { get<RunDatabase>().runPendingSyncDao }
 
     singleOf(::RoomLocalRunDataSource).bind<LocalRunDataSource>()
 }

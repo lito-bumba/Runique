@@ -12,6 +12,7 @@ interface RunDao {
     @Upsert
     suspend fun upsertRun(runEntity: RunEntity)
 
+    @Upsert
     suspend fun upsertRuns(runs: List<RunEntity>)
 
     @Query("SELECT * FROM runentity ORDER BY dateTimeUtc DESC")
