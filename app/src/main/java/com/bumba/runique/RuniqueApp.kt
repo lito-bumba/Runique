@@ -1,6 +1,7 @@
 package com.bumba.runique
 
 import android.app.Application
+import android.content.Context
 import com.bumba.auth.data.di.authDataModule
 import com.bumba.auth.presentation.di.authViewModelModule
 import com.bumba.core.data.di.coreDataModule
@@ -10,6 +11,7 @@ import com.bumba.run.location.di.locationModule
 import com.bumba.run.network.di.networkModule
 import com.bumba.run.presentation.di.runPresentationModule
 import com.bumba.runique.di.appModule
+import com.google.android.play.core.splitcompat.SplitCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -44,5 +46,10 @@ class RuniqueApp: Application() {
                 runDataModule
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }

@@ -3,6 +3,7 @@ package com.bumba.convention
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.BuildType
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.DynamicFeatureExtension
 import com.android.build.api.dsl.LibraryExtension
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.gradle.api.Project
@@ -13,7 +14,6 @@ internal fun Project.configureBuildTypes(
     extensionType: ExtensionType
 ) {
     commonExtension.run {
-
         buildFeatures {
             buildConfig = true
         }
@@ -57,6 +57,27 @@ internal fun Project.configureBuildTypes(
                                 baseUrl = baseUrl,
                                 apiKey = apiKey
                             )
+                        }
+                    }
+                }
+            }
+
+            ExtensionType.DYNAMIC_FEATURE -> {
+                extensions.configure<DynamicFeatureExtension> {
+                    buildTypes {
+                        debug {
+                            configureDebugBuildType(
+                                baseUrl = baseUrl,
+                                apiKey = apiKey
+                            )
+                        }
+                        release {
+                            configureReleaseBuildType(
+                                commonExtension = commonExtension,
+                                baseUrl = baseUrl,
+                                apiKey = apiKey
+                            )
+                            isMinifyEnabled = false
                         }
                     }
                 }
